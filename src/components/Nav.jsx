@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const Nav = ({ onSearch }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [products, setProducts] = useState([]);
 
@@ -17,6 +18,10 @@ const Nav = ({ onSearch }) => {
 
     const toggleOverlay = () => {
         setIsOpen(!isOpen);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
 
@@ -56,8 +61,10 @@ const Nav = ({ onSearch }) => {
 
     return (
         <nav className="fixed top-0 left-0 w-full bg-yellow-400 text-black flex justify-between items-center py-4 px-10 shadow-lg z-[1000]">
-            <FaBarsStaggered className="cursor-pointer hover:text-gray-400 flex lg:hidden" />
-
+            <FaBarsStaggered 
+                className="cursor-pointer hover:text-gray-400 flex lg:hidden" 
+                onClick={toggleSidebar} 
+            />
             <div className="text-2xl font-bold">Harmoni</div>
 
             <ul className="hidden lg:flex space-x-6 text-md font-semibold">
@@ -66,8 +73,8 @@ const Nav = ({ onSearch }) => {
                 <li className="cursor-pointer">Contact Us</li>
                 <li className="relative group cursor-pointer">
                     <p className="flex items-center gap-2 justify-center">More Options <IoIosArrowDown /></p>
-                    <div className="absolute left-0 hidden mt-4 border-t-4 border-black bg-white text-black shadow-lg group-hover:block">
-                        <ul className="space-y-2 p-4 gap-2 flex flex-col items-center px-10">
+                    <div className="absolute left-0 hidden mt-4 border-t-4 border-black rounded-b-lg bg-white text-black shadow-lg group-hover:block">
+                        <ul className="space-y-2 p-4 gap-2 flex flex-col items-start px-10 ">
                             <li className="text-nowrap">Men</li>
                             <li className="text-nowrap">Women</li>
                             <li className="text-nowrap">Kids</li>
@@ -88,8 +95,30 @@ const Nav = ({ onSearch }) => {
                     <GoPerson className="cursor-pointer hover:text-gray-400 lg:flex hidden" />
                 </div>
             </div>
+
+            {/* Sidebar */}
+            <div 
+                className={`fixed top-0 left-0 h-full w-[250px] bg-white shadow-lg z-[1100] transform transition-transform duration-500 ease-in-out ${
+                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
+            >
+                <div className="flex justify-between items-center p-4 border-b">
+                    <div className="text-2xl font-bold">Harmoni</div>
+                    <FaTimes 
+                        className="cursor-pointer text-xl hover:text-gray-400" 
+                        onClick={toggleSidebar} 
+                    />
+                </div>
+                <ul className="flex flex-col space-y-4 p-6 text-lg font-semibold">
+                    <li className="cursor-pointer hover:text-yellow-500">Homepage</li>
+                    <li className="cursor-pointer hover:text-yellow-500">Categories</li>
+                    <li className="cursor-pointer hover:text-yellow-500">Contact Us</li>
+                </ul>
+            </div>
+
+            {/* Overlay */}
             <div
-                className={`fixed top-0 left-0 w-full h-[50vh] shadow-lg bg-white transition-transform duration-500 ease-in-out transform ${isOpen ? "translate-y-0" : "-translate-y-full"}`}
+                className={`fixed top-0 left-0 w-full h-[50vh] shadow-lg bg-white rounded-b-lg transition-transform duration-500 ease-in-out transform ${isOpen ? "translate-y-0" : "-translate-y-full"}`}
             >
                 <div className="flex justify-between items-center p-4">
                     <div className="text-2xl font-bold">Harmoni</div>
