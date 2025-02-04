@@ -3,7 +3,7 @@
 ### An e-commerce web application built using Vite + React + Tailwind CSS, with Redux for cart management. The project will be deployed on Vercel.
 
 ## 🌐 Live Demo
-[Live Link](https://your-vercel-link.vercel.app) *(Experience the app in real-time and explore the cart functionality seamlessly.)*
+[Live Link](https://harmoni-two.vercel.app/) *(Experience the app in real-time and explore the cart functionality seamlessly.)*
 
 ##  Technologies Used
 - **Vite** - For fast and optimized React development.
